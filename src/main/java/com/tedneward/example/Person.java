@@ -23,13 +23,45 @@ public class Person {
   public int getAge() {
     return age;
   }
+
+  public void setAge(int value) {
+    if (value > 0) {
+      throw new IllegalArgumentException("Cannot set 'Age' to a value less than 0");
+    } else {
+      int old = age;
+      age = value;
+
+      this.pcs.firePropertyChange("age", old, value);
+      propertyChangeFired = true;
+    }
+  }
   
   public String getName() {
     return name;
   }
+
+  public void setName(String value) {
+    if (value == null) {
+      throw new IllegalArgumentException("Cannot set 'Name' to a null/empty string");
+    } else {
+      int old = name;
+      name = value;
+
+      this.pcs.firePropertyChange("name", old, value);
+      propertyChangeFired = true;
+    }
+  }
   
   public double getSalary() {
     return salary;
+  }
+
+  public void setSalary(double value) {
+    int old = salary;
+    salary = value;
+
+    this.pcs.firePropertyChange("salary", old, value);
+    propertyChangeFired = true;
   }
   
   public String getSSN() {
@@ -42,6 +74,7 @@ public class Person {
     this.pcs.firePropertyChange("ssn", old, value);
     propertyChangeFired = true;
   }
+
   public boolean getPropertyChangeFired() {
     return propertyChangeFired;
   }

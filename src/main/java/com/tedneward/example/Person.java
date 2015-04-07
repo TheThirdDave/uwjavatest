@@ -32,11 +32,7 @@ public class Person implements Comparable<Person> {
     if (value < 0) {
       throw new IllegalArgumentException("The age of a person needs to be greater than 0.");
     } else {
-      int old = age;
       age = value;
-
-      this.pcs.firePropertyChange("age", old, value);
-      propertyChangeFired = true;
     }
   }
   
@@ -48,11 +44,7 @@ public class Person implements Comparable<Person> {
     if (value == null) {
       throw new IllegalArgumentException("The name of a person needs to not be a null string, must cotain characters.");
     } else {
-      String old = name;
       name = value;
-
-      this.pcs.firePropertyChange("name", old, value);
-      propertyChangeFired = true;
     }
   }
   
@@ -61,11 +53,7 @@ public class Person implements Comparable<Person> {
   }
 
   public void setSalary(double value) {
-    double old = salary;
     salary = value;
-
-    this.pcs.firePropertyChange("salary", old, value);
-    propertyChangeFired = true;
   }
   
   public String getSSN() {

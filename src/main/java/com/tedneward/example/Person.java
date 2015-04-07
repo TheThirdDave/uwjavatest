@@ -57,12 +57,12 @@ public class Person {
   }
 
   public void setSalary(double value) {
-    int old = age;
-    age = value;
+    double old = salary;
+    salary = value;
 
     this.pcs.firePropertyChange("salary", old, value);
     propertyChangeFired = true;
-}
+  }
   
   public String getSSN() {
     return ssn;
@@ -74,6 +74,7 @@ public class Person {
     this.pcs.firePropertyChange("ssn", old, value);
     propertyChangeFired = true;
   }
+
   public boolean getPropertyChangeFired() {
     return propertyChangeFired;
   }

@@ -100,7 +100,7 @@ public class Person implements Comparable<Person> {
   }
 
   public String tostring() {
-    return "{{FIXME}}";
+    return "[Person name:" + name + " age:" + age + " salary:" + salary + "]";
   }
 
   //@Override

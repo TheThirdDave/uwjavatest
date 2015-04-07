@@ -3,7 +3,9 @@ package com.tedneward.example;
 import java.beans.*;
 import java.util.*;
 
-public class Person {
+public class Person implements Comparable<Person> {
+  private final static int population = 0;
+
   private int age;
   private String name;
   private double salary;
@@ -12,12 +14,14 @@ public class Person {
   
   public Person() {
     this("", 0, 0.0d);
+    population = population++;
   }
   
   public Person(String n, int a, double s) {
     name = n;
     age = a;
     salary = s;
+    population = population++;
   }
 
   public int getAge() {
@@ -44,7 +48,7 @@ public class Person {
     if (value == null) {
       throw new IllegalArgumentException("The name of a person needs to not be a null string, must cotain characters.");
     } else {
-      int old = name;
+      String old = name;
       name = value;
 
       this.pcs.firePropertyChange("name", old, value);
@@ -91,12 +95,29 @@ public class Person {
     return age + 10;
   }
   
-  public boolean equals(Person other) {
+  public boolean equals(Person p) {
     return (this.name.equals(p.name) && this.age == p.age);
   }
 
   public String tostring() {
     return "{{FIXME}}";
+  }
+
+  //@Override
+  public int compareTo(Person otherPerson) {
+    if (this.salary == otherPerson.salary) {
+      return 0;
+    } else if (this.salary > otherPerson.salary) {
+      return -1;
+    } else {
+      return 1;
+    }
+  }
+
+  public static class AgeComparator implements Comparator<Person> {
+    public int compare(Person one, Person two) {
+      return one.age.compareTo(two.age);
+    }
   }
 
   // PropertyChangeListener support; you shouldn't need to change any of

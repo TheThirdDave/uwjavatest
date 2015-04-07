@@ -4,7 +4,7 @@ import java.beans.*;
 import java.util.*;
 
 public class Person implements Comparable<Person> {
-  private final static int population = 0;
+  private static int population = 0;
 
   private int age;
   private String name;
@@ -40,7 +40,7 @@ public class Person implements Comparable<Person> {
     return name;
   }
 
-  public void setname(String value) {
+  public void setName(String value) {
     if (value == null) {
       throw new IllegalArgumentException("The name of a person needs to not be a null string, must cotain characters.");
     } else {
@@ -83,15 +83,20 @@ public class Person implements Comparable<Person> {
     return age + 10;
   }
   
-  public boolean equals(Person p) {
-    return (this.name.equals(p.name) && this.age == p.age);
+  @Override
+  public boolean equals(Object otherPerson) {
+    if (otherPerson instanceof Person) {
+      Person p = (Person) otherPerson;
+      return (this.name.equals(p.name) && this.age == p.age);
+    }
+    return false;
   }
 
-  public String tostring() {
+  public String toString() {
     return "[Person name:" + name + " age:" + age + " salary:" + salary + "]";
   }
 
-  //@Override
+  @Override
   public int compareTo(Person otherPerson) {
     if (this.salary == otherPerson.salary) {
       return 0;
@@ -102,9 +107,9 @@ public class Person implements Comparable<Person> {
     }
   }
 
-  public class AgeComparator implements Comparator<Person> {
+  public static class AgeComparator implements Comparator<Person> {
     public int compare(Person one, Person two) {
-      return one.age.compareTo(two.age);
+      return one.age - two.age;
     }
   }
 

@@ -14,13 +14,13 @@ public class Person implements Comparable<Person> {
   
   public Person() {
     this("", 0, 0.0d);
-    population = population++;
   }
   
   public Person(String n, int a, double s) {
     name = n;
     age = a;
     salary = s;
+    ssn = "";
     population = population++;
   }
 
@@ -98,13 +98,7 @@ public class Person implements Comparable<Person> {
 
   @Override
   public int compareTo(Person otherPerson) {
-    if (this.salary == otherPerson.salary) {
-      return 0;
-    } else if (this.salary > otherPerson.salary) {
-      return -1;
-    } else {
-      return 1;
-    }
+    return (int) (otherPerson.salary - this.salary);
   }
 
   public static class AgeComparator implements Comparator<Person> {
